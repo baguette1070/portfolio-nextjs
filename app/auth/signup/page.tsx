@@ -42,6 +42,7 @@ export default function SignUp() {
   };
 
   const removeImage = () => {
+    console.log(image);
     setImage(null);
     setImagePreview(null);
   };
@@ -78,6 +79,7 @@ export default function SignUp() {
       }
     } catch (error) {
       toast.error("An error occurred");
+      toast.error(error as string);
     } finally {
       setLoading(false);
     }
