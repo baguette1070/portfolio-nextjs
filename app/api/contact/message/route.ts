@@ -8,7 +8,7 @@ export async function PUT(request: NextRequest) {
   if (!subject || !message || !email) {
     return NextResponse.json(
       { error: "Subject, message and email are required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -103,10 +103,21 @@ export async function PUT(request: NextRequest) {
   return NextResponse.json({ updateMessage });
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url);
+    const userEmail = searchParams.get("email");
+
+    if (!userEmail) {
+      return NextResponse.json(
+        { error: "Email parameter is required" },
+        { status: 400 },
+      );
+    }
+
     const requests = await prisma.user.findMany({
       where: {
+        email: userEmail,
         message: {
           not: null,
         },
@@ -128,7 +139,7 @@ export async function GET() {
     console.error("Error fetching requests:", error);
     return NextResponse.json(
       { error: "Failed to fetch requests" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

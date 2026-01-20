@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useCallback } from "react";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +10,8 @@ import {
 } from "@/components/ui/dialog";
 import { useSession } from "@/lib/auth-client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 interface Requests {
@@ -28,6 +28,8 @@ export default function Requests() {
   const [isLoading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const router = useRouter();
+
   const deleteRequest = async () => {
     try {
       const response = await fetch("/api/contact/message", {
@@ -37,36 +39,38 @@ export default function Requests() {
         },
         body: JSON.stringify({ email: session?.user.email }),
       });
+
       if (!response.ok) {
-        toast.error("Failed to delete request");
         throw new Error("Failed to delete request");
       }
+
       toast.success("Request deleted successfully");
+      router.replace("/#contact");
     } catch (error) {
       toast.error((error as Error)?.message || "Failed to delete request");
     }
   };
 
   const fetchRequests = useCallback(async () => {
-    if (!session?.user) return;
-    
+    if (!session?.user?.email) return;
+
     try {
       setLoading(true);
-      const response = await fetch("/api/contact/message");
+      const response = await fetch(
+        `/api/contact/message?email=${encodeURIComponent(session.user.email)}`,
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch requests");
       }
       const data = await response.json();
       setRequests(data.requests || data);
     } catch (error) {
-      toast.error(
-        (error as Error)?.message || "Error loading requests"
-      );
+      toast.error((error as Error)?.message || "Error loading requests");
       console.error(error);
     } finally {
       setLoading(false);
     }
-  }, [session?.user]);
+  }, [session?.user?.email]);
 
   useEffect(() => {
     fetchRequests();
