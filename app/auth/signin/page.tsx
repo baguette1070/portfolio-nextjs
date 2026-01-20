@@ -101,7 +101,7 @@ export default function SignIn() {
                       if (toastId.current) toast.dismiss(toastId.current);
                       toast.error(ctx?.error?.message || "Sign in error");
                     },
-                  }
+                  },
                 );
               }}
             >
@@ -115,7 +115,7 @@ export default function SignIn() {
             <div
               className={cn(
                 "w-full gap-2 flex items-center",
-                "justify-between flex-col"
+                "justify-between flex-col",
               )}
             >
               <Button
@@ -136,7 +136,7 @@ export default function SignIn() {
                       onResponse: () => {
                         setLoading(false);
                       },
-                    }
+                    },
                   );
                 }}
               >

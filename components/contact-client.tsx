@@ -52,7 +52,7 @@ export default function ContactClient({ user }: ContactClientProps) {
         });
       } else {
         toast.error(
-          "You already asked for a mission with this email, just wait."
+          "You already asked for a mission with this email, just wait.",
         );
       }
     } catch (error) {
@@ -64,7 +64,7 @@ export default function ContactClient({ user }: ContactClientProps) {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,

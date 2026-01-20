@@ -69,20 +69,20 @@ export default function NavbarClient({ user }: NavbarClientProps) {
                   onClick={() => scrollToSection("#home")}
                   className={cn(
                     buttonVariants({ variant: "ghost" }),
-                    "cursor-pointer duration-300"
+                    "cursor-pointer duration-300",
                   )}
                 >
-                  Home
+                  About
                 </button>
               ) : (
                 <Link href="/">
                   <button
                     className={cn(
                       buttonVariants({ variant: "ghost" }),
-                      "cursor-pointer duration-300"
+                      "cursor-pointer duration-300",
                     )}
                   >
-                    Home
+                    About
                   </button>
                 </Link>
               )}
@@ -91,7 +91,7 @@ export default function NavbarClient({ user }: NavbarClientProps) {
                   onClick={() => scrollToSection("#projects")}
                   className={cn(
                     buttonVariants({ variant: "ghost" }),
-                    "cursor-pointer duration-300"
+                    "cursor-pointer duration-300",
                   )}
                 >
                   Projects
@@ -101,7 +101,7 @@ export default function NavbarClient({ user }: NavbarClientProps) {
                   <button
                     className={cn(
                       buttonVariants({ variant: "ghost" }),
-                      "cursor-pointer duration-300"
+                      "cursor-pointer duration-300",
                     )}
                   >
                     Projects
@@ -113,7 +113,7 @@ export default function NavbarClient({ user }: NavbarClientProps) {
                   onClick={() => scrollToSection("#contact")}
                   className={cn(
                     buttonVariants({ variant: "ghost" }),
-                    "cursor-pointer duration-300"
+                    "cursor-pointer duration-300",
                   )}
                 >
                   Contact
@@ -123,7 +123,7 @@ export default function NavbarClient({ user }: NavbarClientProps) {
                   <button
                     className={cn(
                       buttonVariants({ variant: "ghost" }),
-                      "cursor-pointer duration-300"
+                      "cursor-pointer duration-300",
                     )}
                   >
                     Contact
@@ -137,7 +137,7 @@ export default function NavbarClient({ user }: NavbarClientProps) {
                     onClick={() => redirect("/auth")}
                     className={cn(
                       buttonVariants({ variant: "ghost" }),
-                      "cursor-pointer duration-300"
+                      "cursor-pointer duration-300",
                     )}
                   >
                     My Account
@@ -146,7 +146,7 @@ export default function NavbarClient({ user }: NavbarClientProps) {
                     onClick={() => redirect("/dashboard/my-requests")}
                     className={cn(
                       buttonVariants({ variant: "ghost" }),
-                      "cursor-pointer duration-300"
+                      "cursor-pointer duration-300",
                     )}
                   >
                     Your requests
@@ -167,7 +167,7 @@ export default function NavbarClient({ user }: NavbarClientProps) {
                     <Button
                       variant="outline"
                       className={cn(
-                        "text-sm font-medium transition-colors hover:text-primary cursor-pointer"
+                        "text-sm font-medium transition-colors hover:text-primary cursor-pointer",
                       )}
                     >
                       Sign in
@@ -178,7 +178,7 @@ export default function NavbarClient({ user }: NavbarClientProps) {
                     <Button
                       variant="default"
                       className={cn(
-                        "cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
+                        "cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3",
                       )}
                     >
                       Sign up
@@ -255,7 +255,7 @@ export default function NavbarClient({ user }: NavbarClientProps) {
               <Button
                 variant="outline"
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary cursor-pointer"
+                  "text-sm font-medium transition-colors hover:text-primary cursor-pointer",
                 )}
               >
                 Signin

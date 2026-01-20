@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     if (!email || !password) {
       return NextResponse.json(
         { error: "Missing email or password" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     if (!result) {
       return NextResponse.json(
         { error: "Erreur lors de la création du compte" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -57,14 +57,14 @@ export async function POST(request: NextRequest) {
       ) {
         return NextResponse.json(
           { error: "Email already exists" },
-          { status: 400 }
+          { status: 400 },
         );
       }
     }
 
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
