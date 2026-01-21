@@ -15,26 +15,29 @@ import { signIn } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
-export default function SignIn() {
+export default function SignIn(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const searchParams = useSearchParams();
   const toastId = useRef<string | number | undefined>(undefined);
 
   // Afficher un message de succès si l'inscription est confirmée
   useEffect(() => {
-    if (searchParams.get("signup-success") === "true") {
-      toast.success(
-        "Inscription confirmée ! Vous pouvez maintenant vous connecter.",
-      );
-    }
-  }, [searchParams]);
+    props.searchParams.then((searchParams) => {
+      if (searchParams["signup-success"] === "true") {
+        toast.success(
+          "Inscription confirmée ! Vous pouvez maintenant vous connecter.",
+        );
+      }
+    });
+  }, [props.searchParams]);
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
