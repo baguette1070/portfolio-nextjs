@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import React, { useState } from "react";
 import { toast } from "sonner";
 
 interface AuthClientProps {
@@ -29,13 +29,21 @@ interface AuthClientProps {
     name: string;
     image?: string | null;
   } | null;
+  emailChanged?: boolean;
 }
 
-export function AuthClient({ user }: AuthClientProps) {
+export function AuthClient({ user, emailChanged }: AuthClientProps) {
   const [openName, setOpenName] = useState(false);
   const [openEmail, setOpenEmail] = useState(false);
   const [email, setEmail] = useState("");
   const [nameUser, setNameUser] = useState("");
+
+  // Afficher un message de succès si l'email a été changé
+  React.useEffect(() => {
+    if (emailChanged) {
+      toast.success("Email changé avec succès !");
+    }
+  }, [emailChanged]);
 
   const updateEmail = async (newEmail: string) => {
     try {
@@ -49,10 +57,15 @@ export function AuthClient({ user }: AuthClientProps) {
       if (!response.ok) {
         throw new Error("Error updating email");
       }
-      toast.success("Email updated");
+      const data = await response.json();
+      toast.success(data.message || "Un email de confirmation a été envoyé.");
       setOpenEmail(false);
+
+      window.location.reload();
     } catch (error) {
-      toast.error((error as Error).message || "Error updating email");
+      toast.error(
+        (error as Error).message || "Erreur lors de la mise à jour de l'email",
+      );
     }
   };
 
@@ -83,7 +96,10 @@ export function AuthClient({ user }: AuthClientProps) {
           <p className="text-muted-foreground mb-6">
             You must be logged in to view your account.
           </p>
-          <Button asChild>
+          <Button
+            asChild
+            className="cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+          >
             <a href="/auth/signin">Sign in</a>
           </Button>
         </div>
@@ -114,9 +130,17 @@ export function AuthClient({ user }: AuthClientProps) {
                 />
               </div>
             ) : (
-              <span className="text-2xl font-bold text-gray-600">
-                {user.name?.charAt(0) || user?.email?.charAt(0) || "?"}
-              </span>
+              <>
+                <span className="text-2xl font-bold text-gray-600">
+                  {user.name
+                    ?.split(" ")
+                    .map((word) => word.charAt(0).toUpperCase())
+                    .join("")
+                    .slice(0, 2) ||
+                    user?.email?.charAt(0)?.toUpperCase() ||
+                    "?"}
+                </span>
+              </>
             )}
           </div>
           <div>

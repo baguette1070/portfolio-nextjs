@@ -70,3 +70,30 @@ model Verification {
 
   @@map("verification")
 }
+
+model EmailChangeRequest {
+  id        String   @id @default(cuid())
+  userId    String
+  oldEmail  String
+  newEmail  String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("email_change_request")
+}
+
+model AccountConfirmation {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  image     String?
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("account_confirmation")
+}

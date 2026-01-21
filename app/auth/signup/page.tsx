@@ -72,7 +72,7 @@ export default function SignUp() {
       });
 
       if (response.ok) {
-        toast.success("Account created successfully!.");
+        toast.success("Check your email to confirm your account.");
         router.push("/auth/signin");
       } else {
         toast.error("Email already exists");
@@ -86,7 +86,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 mt-24">
       <Card className="max-w-md w-full">
         <CardHeader>
           <CardTitle className="text-lg md:text-xl">Sign up</CardTitle>
