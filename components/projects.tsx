@@ -22,7 +22,7 @@ export function Projects() {
         "Tailwind CSS",
       ],
       github: "https://github.com/baguette1070",
-      live: "https://ecommerce-platform.vercel.app",
+      live: "https://giacca-wolfcars.vercel.app",
       featured: true,
     },
   ];
